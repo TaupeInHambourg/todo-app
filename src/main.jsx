@@ -1,16 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { Button, NextUIProvider } from '@nextui-org/react'
 import App from './App.jsx'
 import './index.css'
+import { NextUIProvider } from '@nextui-org/react'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <NextUIProvider>
-      <Button
-        color='primary'
-      > Mon bouton
-      </Button>
+      <App />
     </NextUIProvider>
   </React.StrictMode>
 )
