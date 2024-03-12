@@ -7,7 +7,8 @@ function ToDoList ({ todos }) {
         todos.map((todo) => {
           return (
             <ToDo
-              key={todo.title}
+              key={todo._id}
+              image={todo.images[0]}
               title={todo.title}
               description={todo.description}
             />
