@@ -15,7 +15,7 @@ function AddTodo ({ onAddTodo }) {
         isIconOnly
         onClick={onOpen}
       >
-        <FaPlus />
+        <FaPlus className='w-8 h-8' />
       </Button>
       <AddTodoModal
         isOpen={isOpen}

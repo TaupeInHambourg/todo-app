@@ -1,16 +1,17 @@
 import { Button, Input, Select, SelectItem, Switch, Textarea } from '@nextui-org/react'
 import { useState } from 'react'
 
-function TodoForm ({ onSubmit }) {
+function TodoForm ({ todoToEdit, onSubmit, onClose }) {
   const [formData, setFormData] = useState({
-    title: 'Dumb ways to yab',
-    description: 'Se faire guillotiner par un bus',
-    status: 'TODO',
-    important: false
+    title: todoToEdit?.title || 'Dumb ways to yab',
+    description: todoToEdit?.description || 'Se faire guillotiner par un bus',
+    status: todoToEdit?.status[0] || 'TODO',
+    important: todoToEdit?.important || false
   })
 
   const handleChange = (event) => {
     setFormData({
+      // '...' est un spread operator, il permet de recréer la data en écrasant les valeurs qui changent
       ...formData,
       [event.target.name]: event.target.value
     })
@@ -18,7 +19,8 @@ function TodoForm ({ onSubmit }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    if (onSubmit) onSubmit(formData)
+    if (onSubmit) onSubmit(formData, todoToEdit?._id)
+    onClose()
   }
 
   return (
@@ -74,7 +76,7 @@ function TodoForm ({ onSubmit }) {
         type='submit'
         color='default'
       >
-        Envoyer
+        {todoToEdit ? 'Modifier' : 'Ajouter'}
       </Button>
     </form>
   )
