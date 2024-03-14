@@ -1,9 +1,12 @@
 import { Button } from '@nextui-org/react'
 import { MdDelete } from 'react-icons/md'
+import { useTodos } from '../hooks/todosHooks'
 
-function DeleteTodo ({id, onDelete}) {
+function DeleteTodo ({ id }) {
+  const { deleteTodo } = useTodos()
+
   const handleDeleteTodo = (event) => {
-    if (onDelete) onDelete(id)
+    deleteTodo(id)
   }
   return (
     <Button

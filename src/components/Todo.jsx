@@ -2,7 +2,7 @@ import { Button, Card, CardHeader, Image } from '@nextui-org/react'
 import DeleteTodo from './DeleteTodo'
 import { FaPen } from 'react-icons/fa'
 
-function ToDo ({ onDelete, todo, openEditModal }) {
+function ToDo ({ todo, openEditModal }) {
   const { title, description, image, _id } = todo
   return (
     <Card>
@@ -31,7 +31,7 @@ function ToDo ({ onDelete, todo, openEditModal }) {
           </Button>
         </div>
         <div className='flex flex-col'>
-          <DeleteTodo id={_id} onDelete={onDelete} />
+          <DeleteTodo id={_id} />
         </div>
       </CardHeader>
     </Card>

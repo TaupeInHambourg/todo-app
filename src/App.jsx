@@ -1,45 +1,19 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
-import ToDoList from './components/ToDoList'
-import { addTodo, deleteTodo, getTodos, updateTodo } from './services/api'
-import { useEffect, useState } from 'react'
-import AddTodo from './components/AddTodo'
+import Todos from './pages/todos'
+import Auth from './pages/auth'
+import CustomNavbar from './components/navbar'
 
 function App () {
-  const [todos, setTodos] = useState([])
-
-  useEffect(() => {
-    const getData = async () => {
-      const todosData = await getTodos()
-      setTodos(todosData)
-    }
-
-    getData()
-  }, [])
-
-  const handleAddTodo = async (todo) => {
-    const todosData = await addTodo(todo)
-    setTodos(todosData)
-  }
-
-  const handleDeleteTodo = async (id) => {
-    const todosData = await deleteTodo(id)
-    setTodos(todosData)
-  }
-
-  const handleUpdateTodo = async (todo) => {
-    await updateTodo(todo)
-  }
-
   return (
     <>
-      <ToDoList
-        todos={todos}
-        onUpdate={handleUpdateTodo}
-        onDelete={handleDeleteTodo}
-      />
-      <AddTodo
-        onAddTodo={handleAddTodo}
-      />
+      <CustomNavbar />
+      <BrowserRouter>
+        <Routes>
+          <Route index path='/' element={<Todos />} />
+          <Route path='/auth' element={<Auth />} />
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
