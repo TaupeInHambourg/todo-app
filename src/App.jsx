@@ -3,6 +3,7 @@ import './App.css'
 import Todos from './pages/todos'
 import Auth from './pages/auth'
 import CustomNavbar from './components/navbar'
+import ProtectedRoutes from './components/ProtectedRoutes'
 
 function App () {
   return (
@@ -10,7 +11,9 @@ function App () {
       <CustomNavbar />
       <BrowserRouter>
         <Routes>
-          <Route index path='/' element={<Todos />} />
+          <Route element={<ProtectedRoutes />}>
+            <Route index path='/' element={<Todos />} />
+          </Route>
           <Route path='/auth' element={<Auth />} />
         </Routes>
       </BrowserRouter>
