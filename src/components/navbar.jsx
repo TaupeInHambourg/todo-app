@@ -3,10 +3,10 @@ import { useState } from 'react'
 import { AcmeLogo } from './AcmeLogo.jsx'
 import { useAuth } from '../hooks/authHooks.js'
 
-function CustomNavbar () {
+function CustomNavbar ({ openSignupModal }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const { authData } = useAuth()
-  const { logout } = useAuth()
+  const { authData, logout } = useAuth()
+
   const isLoggedIn = authData?.token && authData?._user
   const handleLogout = (event) => {
     logout()
@@ -58,7 +58,11 @@ function CustomNavbar () {
                     <p className='font-semibold'>Signed in as</p>
                     <p className='font-semibold'>zoey@example.com</p>
                   </DropdownItem>
-                  <DropdownItem key='logout' color='danger' onPress={handleLogout}>
+                  <DropdownItem
+                    key='logout'
+                    color='danger'
+                    onPress={handleLogout}
+                  >
                     Log Out
                   </DropdownItem>
                 </DropdownMenu>
@@ -71,7 +75,12 @@ function CustomNavbar () {
                 <Link href='#'>Login</Link>
               </NavbarItem>
               <NavbarItem>
-                <Button as={Link} color='primary' href='#' variant='flat'>
+                <Button
+                  as={Link}
+                  color='primary'
+                  variant='flat'
+                  onPress={() => openSignupModal('isNotLog')}
+                >
                   Sign Up
                 </Button>
               </NavbarItem>
@@ -100,6 +109,7 @@ function CustomNavbar () {
         </NavbarMenuItem>
       </NavbarMenu>
     </Navbar>
+
   )
 }
 

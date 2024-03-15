@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useBetween } from 'use-between'
-import { apiLogin } from '../services/api'
+import { apiLogin, apiSignup } from '../services/api'
 import { toast } from 'react-toastify'
 
 function useAuth () {
@@ -45,7 +45,20 @@ function useAuth () {
     }
   }, [authData])
 
-  return { login, loading, error, authData, logout }
+  const addUser = useCallback(async (formData) => {
+    try {
+      setLoading(true)
+      console.log('FORMDATA', formData)
+      const response = await apiSignup(formData)
+      console.log('RESPONSE', response)
+    } catch (error) {
+      console.error(error)
+      setError(error)
+      setLoading(false)
+    }
+  })
+
+  return { login, loading, error, authData, logout, addUser }
 }
 
 const useAuthSharable = () => useBetween(useAuth)

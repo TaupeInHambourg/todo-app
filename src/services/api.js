@@ -40,10 +40,18 @@ async function apiLogin (credentials) {
   return response.data
 }
 
+async function apiSignup (credentials) {
+  console.log('API_CREDENTIALS', credentials)
+  const response = await api.post('/auth/register', credentials)
+  console.log('API_RESPONSE', response)
+  return response.data
+}
+
 export {
   apiGetTodos,
   apiAddTodo,
   apiDeleteTodo,
   apiUpdateTodo,
-  apiLogin
+  apiLogin,
+  apiSignup
 }
