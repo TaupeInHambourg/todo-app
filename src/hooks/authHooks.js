@@ -39,7 +39,7 @@ function useAuth () {
 
   useEffect(() => {
     if (authData) {
-      window.localStorage.getItem('AUTH', JSON.stringify(authData))
+      window.localStorage.setItem('AUTH', JSON.stringify(authData))
     } else {
       window.localStorage.removeItem('AUTH')
     }

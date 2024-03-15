@@ -14,6 +14,17 @@ function ToDoList ({ todos }) {
     setTodoToEdit(todo)
     onOpen()
   }
+
+  if (!todos || todos.length < 1) {
+    return (
+      <div className='w-full flex flex-row items-center justify-center py-6'>
+        <h2 className='font-semibold text-xl'>
+          Créer votre premier todo 🎉
+        </h2>
+      </div>
+    )
+  }
+
   return (
     <>
       <div className='flex flex-col gap-4 py-2 px-4'>

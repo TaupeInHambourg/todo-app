@@ -21,7 +21,6 @@ function CustomNavbar () {
         />
         <NavbarBrand>
           <AcmeLogo />
-          <p className='font-bold text-inherit'>Todo</p>
         </NavbarBrand>
       </NavbarContent>
 
