@@ -3,10 +3,10 @@ import SignupForm from './SignupForm'
 import { useAuth } from '../hooks/authHooks'
 
 function SignupModal ({ isOpen, onOpenChange, toSignup }) {
-  const { addUser } = useAuth()
+  const { signup } = useAuth()
 
   const handleSubmit = (formData) => {
-    addUser(formData)
+    signup(formData)
   }
 
   return (

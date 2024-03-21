@@ -41,9 +41,7 @@ async function apiLogin (credentials) {
 }
 
 async function apiSignup (credentials) {
-  console.log('API_CREDENTIALS', credentials)
   const response = await api.post('/auth/register', credentials)
-  console.log('API_RESPONSE', response)
   return response.data
 }
 

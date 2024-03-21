@@ -36,13 +36,14 @@ function ToDoList ({ todos }) {
               image={todo.images[0]}
               title={todo.title}
               description={todo.description}
+              status={todo.status}
               id={todo._id}
               todo={todo}
               openEditModal={handleOpenEditModal}
             />
           )
         })
-     }
+      }
       </div>
 
       <AddTodoModal

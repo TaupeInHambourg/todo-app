@@ -14,10 +14,34 @@ function useAuth () {
       setLoading(true)
       const response = await apiLogin(credentials)
       setAuthData(response)
+
       if (response && response.token && response._user) {
         toast.success('Vous êtes connecté !')
       }
-      // window.localStorage.setItem('AUTH', JSON.stringify(response))
+    } catch (error) {
+      console.error(error)
+      setError(error)
+      setLoading(false)
+    }
+  }, [])
+
+  const signup = useCallback(async (credentials) => {
+    try {
+      setLoading(true)
+
+      if (!credentials.email) {
+        toast.error('Email invalide')
+      }
+      if (!credentials.password) {
+        toast.error('Veuillez renseigner un mot de passe')
+      }
+
+      const response = await apiSignup(credentials)
+      setAuthData(response)
+
+      if (response && response.token && response._user) {
+        toast.success('Vous êtes inscrit !')
+      }
     } catch (error) {
       console.error(error)
       setError(error)
@@ -45,20 +69,7 @@ function useAuth () {
     }
   }, [authData])
 
-  const addUser = useCallback(async (formData) => {
-    try {
-      setLoading(true)
-      console.log('FORMDATA', formData)
-      const response = await apiSignup(formData)
-      console.log('RESPONSE', response)
-    } catch (error) {
-      console.error(error)
-      setError(error)
-      setLoading(false)
-    }
-  })
-
-  return { login, loading, error, authData, logout, addUser }
+  return { login, loading, error, authData, logout, signup }
 }
 
 const useAuthSharable = () => useBetween(useAuth)
