@@ -5,15 +5,15 @@ import Todos from './pages/todos'
 import Auth from './pages/auth'
 import CustomNavbar from './components/navbar'
 import ProtectedRoutes from './components/ProtectedRoutes'
-import { useState } from 'react'
 import SignupModal from './components/SignupModal'
+import { useState } from 'react'
 
-function App () {
+function App ({ loading }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
   const [toSignup, setToSignup] = useState()
 
-  const handleOpenSignupModal = (e) => {
-    setToSignup('isNotLog')
+  const handleOpenSignupModal = () => {
+    setToSignup('signup')
     onOpen()
   }
 
@@ -27,13 +27,14 @@ function App () {
         onOpen={onOpen}
         onOpenChange={onOpenChange}
         toSignup={toSignup}
+        openSignupModal={handleOpenSignupModal}
       />
       <BrowserRouter>
         <Routes>
           <Route element={<ProtectedRoutes />}>
             <Route index path='/' element={<Todos />} />
           </Route>
-          <Route path='/auth' element={<Auth />} />
+          <Route path='/auth' element={<Auth openSignupModal={handleOpenSignupModal} />} />
         </Routes>
       </BrowserRouter>
     </>

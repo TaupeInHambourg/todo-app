@@ -2,13 +2,13 @@ import { Button, Input } from '@nextui-org/react'
 import { useState } from 'react'
 import { useAuth } from '../hooks/authHooks'
 
-function LoginForm () {
+function LoginForm ({ openSignupModal, onClose }) {
   const [formData, setFormData] = useState({
     email: 'test@test.fr',
     password: '123456789'
   })
 
-  const { login, logout } = useAuth()
+  const { login } = useAuth()
 
   const handleChange = (event) => {
     setFormData({
@@ -21,7 +21,10 @@ function LoginForm () {
   const handleSubmit = (e) => {
     e.preventDefault()
     login(formData)
+    onClose()
   }
+
+  /* Connecter le btn au signup */
 
   return (
     <form
@@ -52,13 +55,14 @@ function LoginForm () {
       >
         Connexion
       </Button>
+
       <Button
-        onPress={logout}
-        color='danger'
+        color='primary'
+        variant='bordered'
+        onPress={() => openSignupModal()}
       >
-        Deconnexion
+        Pas encore inscrit ?
       </Button>
-      {/* <pre>{JSON.stringify(authData, null, 2)}</pre> */}
     </form>
   )
 }

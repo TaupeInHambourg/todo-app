@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useBetween } from 'use-between'
 import { apiLogin, apiSignup } from '../services/api'
 import { toast } from 'react-toastify'
+// import Loading from '../components/Loading'
 
 function useAuth () {
   const [authData, setAuthData] = useState()
@@ -12,6 +13,11 @@ function useAuth () {
   const login = useCallback(async (credentials) => {
     try {
       setLoading(true)
+      // if (loading === true) {
+      //   return (
+      //     <Loading />
+      //   )
+      // }
       const response = await apiLogin(credentials)
       setAuthData(response)
 
@@ -38,10 +44,8 @@ function useAuth () {
 
       const response = await apiSignup(credentials)
       setAuthData(response)
-
-      if (response && response.token && response._user) {
-        toast.success('Vous êtes inscrit !')
-      }
+      toast.success('Vous êtes inscrit !')
+      login(credentials)
     } catch (error) {
       console.error(error)
       setError(error)

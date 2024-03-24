@@ -1,39 +1,58 @@
-import { Badge, Button, Card, CardHeader, Image } from '@nextui-org/react'
+import { Badge, Button, Card, CardBody, CardHeader, Divider, Image } from '@nextui-org/react'
 import DeleteTodo from './DeleteTodo'
 import { FaPen } from 'react-icons/fa'
+// import { useState } from 'react'
 
-function ToDo ({ todo, openEditModal }) {
-  const { title, description, image, _id, status } = todo
-  let badgeColor = ({ status }) => {
-    if (status === 'TODO') {
-      badgeColor = 'success'
-    } else if (status === 'IN-PROGRESS') {
-      badgeColor = 'warning'
+function ToDo ({ todo, openEditModal, loading }) {
+  const { title, description, _id, status, important } = todo
+  // const [visible, setvisible] = useState(false)
+
+  // const isVisible = ({ important }) => {
+  //   if ({ important }.value === false) {
+  //     setvisible(true)
+  //   } else if ({ important }.value === true) {
+  //     setvisible(false)
+  //   }
+  // }
+
+  const isVisible = (i) => {
+    if (i.value === false) {
+      i = true
+    } else if (i.value === true) {
+      i = false
     }
+    console.log('IMPORTANT', i)
   }
 
   return (
-    <Badge
-      content={status}
-      color={badgeColor}
-      placement='top-right'
-      shape='circle'
-      size='lg'
-    >
-      <Card>
-        <CardHeader className='flex gap-3'>
+    <Card className='w-full' loading={loading}>
+      <Badge
+        content=''
+        color='danger'
+        placement='top-right'
+        isInvisible={isVisible({ important })}
+        // isInvisible={visible}
+      >
+        <CardHeader className='flex flex-row gap-3 w-full'>
           <Image
-            alt='nextui logo'
-            height={40}
+            alt='image de la todo'
             radius='sm'
-            src={image}
-            width={40}
+            src='../public/images/todo.jpeg'
+            className='w-40 object-cover min-w-40 min-h-40'
           />
           <div className='flex flex-col flex-grow'>
-            <p className='text-md'>{title}</p>
-            <p className='text-small text-default-500'>{description}</p>
+            <CardHeader>
+              <div className='flex flex-col flex-grow'>
+                <p className='text-md'>{title}</p>
+                <p className='text-tiny text-default-800'>{status}</p>
+              </div>
+            </CardHeader>
+            <Divider />
+            <CardBody>
+              <p className='text-small text-default-500'>{description}</p>
+            </CardBody>
           </div>
-          <div className='flex flex-col'>
+          <div className='flex flex-col gap-4'>
             <Button
               className='w-8 h-8'
               radius='full'
@@ -44,13 +63,11 @@ function ToDo ({ todo, openEditModal }) {
             >
               <FaPen className='w-5 h-5' />
             </Button>
-          </div>
-          <div className='flex flex-col'>
             <DeleteTodo id={_id} />
           </div>
         </CardHeader>
-      </Card>
-    </Badge>
+      </Badge>
+    </Card>
   )
 }
 

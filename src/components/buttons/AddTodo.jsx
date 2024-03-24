@@ -1,6 +1,6 @@
 import { Button, useDisclosure } from '@nextui-org/react'
 import { FaPlus } from 'react-icons/fa6'
-import AddTodoModal from './AddTodoModal'
+import AddTodoModal from '../AddTodoModal'
 
 function AddTodo ({ onAddTodo }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()

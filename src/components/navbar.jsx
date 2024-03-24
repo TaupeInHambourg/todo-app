@@ -1,7 +1,9 @@
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Button, Dropdown, DropdownTrigger, Avatar, DropdownMenu, DropdownItem } from '@nextui-org/react'
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Dropdown, DropdownTrigger, Avatar, DropdownMenu, DropdownItem } from '@nextui-org/react'
 import { useState } from 'react'
 import { AcmeLogo } from './AcmeLogo.jsx'
 import { useAuth } from '../hooks/authHooks.js'
+import LoginButton from './buttons/Login.jsx'
+import SignupButton from './buttons/Signup.jsx'
 
 function CustomNavbar ({ openSignupModal }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -28,11 +30,6 @@ function CustomNavbar ({ openSignupModal }) {
         <NavbarItem>
           <Link color='foreground' href='/'>
             Todos
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <Link href='/auth' aria-current='page'>
-            Auth
           </Link>
         </NavbarItem>
       </NavbarContent>
@@ -71,18 +68,11 @@ function CustomNavbar ({ openSignupModal }) {
             )
           : (
             <NavbarContent justify='end'>
-              <NavbarItem className='hidden lg:flex'>
-                <Link href='#'>Login</Link>
+              <NavbarItem className='lg:flex' isActive>
+                <LoginButton />
               </NavbarItem>
               <NavbarItem>
-                <Button
-                  as={Link}
-                  color='primary'
-                  variant='flat'
-                  onPress={() => openSignupModal('isNotLog')}
-                >
-                  Sign Up
-                </Button>
+                <SignupButton openSignupModal={openSignupModal} />
               </NavbarItem>
             </NavbarContent>
             )

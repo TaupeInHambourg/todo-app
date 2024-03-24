@@ -1,10 +1,11 @@
 import { Button, Input } from '@nextui-org/react'
 import { useState } from 'react'
+import { useAuth } from '../hooks/authHooks'
 
-function SignupForm ({ onSubmit, onClose, toSignup }) {
+function SignupForm ({ onClose }) {
   const [formData, setFormData] = useState({
-    email: toSignup?.email || 'email@test.fr',
-    password: toSignup?.password || 'password vide'
+    email: 'email@test.fr',
+    password: 'password vide'
   })
 
   const handleChange = (event) => {
@@ -14,9 +15,11 @@ function SignupForm ({ onSubmit, onClose, toSignup }) {
     })
   }
 
-  const handleSubmit = async (event) => {
+  const { signup } = useAuth()
+
+  const handleSubmit = (event) => {
     event.preventDefault()
-    if (onSubmit) onSubmit(formData)
+    signup(formData)
     onClose()
   }
 
