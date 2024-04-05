@@ -3,8 +3,8 @@ import { useState } from 'react'
 
 function TodoForm ({ todoToEdit, onSubmit, onClose }) {
   const [formData, setFormData] = useState({
-    title: todoToEdit?.title || 'Dumb ways to yab',
-    description: todoToEdit?.description || 'Se faire guillotiner par un bus',
+    title: todoToEdit?.title || 'Nom de la tâche',
+    description: todoToEdit?.description || 'Description de la tâche',
     status: todoToEdit?.status[0] || 'TODO',
     important: todoToEdit?.important || false
   })
